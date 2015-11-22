@@ -63,20 +63,16 @@ public class Annonce extends ObjetPersistant{
 	private String imagePrincipal;
 	@Column(name="ann_datedepose")
 	private Date dateDepose;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "cat_id", nullable = false)
 	private Categorie categorie;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "cpt_id")
 	private Compte compte;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "vil_id", nullable = false)
 	private Ville ville;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "reg_id", nullable = false)
 	private Region region;
 	@Transient

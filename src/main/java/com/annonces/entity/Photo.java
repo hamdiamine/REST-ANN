@@ -22,7 +22,6 @@ public class Photo extends ObjetPersistant {
 	@Column(name="pht_num",nullable=false)
 	private int num;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "ann_id", nullable = true)
 	private Annonce annonce; 
 	

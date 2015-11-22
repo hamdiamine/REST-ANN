@@ -44,3 +44,16 @@ Temporary Items
 /target/
 *.iml
 /.idea
+
+*.class
+*.jar
+.mvn/wrapper/maven-wrapper.properties
+.settings/org.eclipse.core.resources.prefs
+bin/target/classes/META-INF/MANIFEST.MF
+bin/src/main/resources/application.properties
+bin/pom.xml
+bin/.mvn/wrapper/maven-wrapper.properties
+*.prefs
+bin/mvnw.cmd
+bin/mvnw
+bin/.project

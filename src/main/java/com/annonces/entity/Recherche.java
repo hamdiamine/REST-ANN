@@ -25,7 +25,6 @@ public class Recherche extends ObjetPersistant{
 	@Column(name="rch_type", length=1)
 	private int type;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "reg_id")
 	private Region region;
 	@Column(name="rch_adresse", length=100)

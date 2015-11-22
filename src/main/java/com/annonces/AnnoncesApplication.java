@@ -25,7 +25,7 @@ public class AnnoncesApplication {
     public ObjectMapper objectMapperBean(){
         //use the hibernate module for jackson serialization
         final Hibernate4Module hibernate4Module = new Hibernate4Module();
-        hibernate4Module.configure(Hibernate4Module.Feature.FORCE_LAZY_LOADING, false); //don't force lazy loading
+        hibernate4Module.configure(Hibernate4Module.Feature.SERIALIZE_IDENTIFIER_FOR_LAZY_NOT_LOADED_OBJECTS, false); //don't force lazy loading
 
         //activate the hibernate jackson module for the project ObjectMapper bean.
         final ObjectMapper objectMapper = new ObjectMapper();

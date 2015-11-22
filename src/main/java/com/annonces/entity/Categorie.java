@@ -20,7 +20,6 @@ public class Categorie extends ObjetPersistant{
 	@Column(name="cat_label",nullable=false, length=20)
 	private String label;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "tyc_id", nullable = false)
 	private TypeCategorie typeCategorie;
 	

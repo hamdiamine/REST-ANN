@@ -20,7 +20,6 @@ public class Ville extends ObjetPersistant{
 	@Column(name="vil_codePostal", nullable=false)
 	private String codePotal;
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name = "reg_id", nullable = false)
 	private Region region;
 	public String getLabel() {
