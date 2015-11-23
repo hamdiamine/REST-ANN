@@ -15,6 +15,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @AttributeOverride(name = "id", column = @Column(name = "cat_id"))
 public class Categorie extends ObjetPersistant{
 	
+	public Categorie(){
+		super();
+	}
+	
+	public Categorie(Long id){
+		setId(id);
+	}
+	
 	@Column(name="cat_code",nullable=false, length=10)
 	private String code;
 	@Column(name="cat_label",nullable=false, length=20)

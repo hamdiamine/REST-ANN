@@ -46,7 +46,7 @@ public class Annonce extends ObjetPersistant{
 	@Column(name="ann_lapt")
     private Long laptitude;
 	@Column(name="ann_long")
-    private Long longitude;
+	private Long longitude;
 	@Column(name="ann_pseudo", length=10)
     private String pseudo;
 	@Column(name="ann_email", length=80)

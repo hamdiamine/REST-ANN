@@ -14,6 +14,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "ann_ville")
 @AttributeOverride(name = "id", column = @Column(name = "vil_id"))
 public class Ville extends ObjetPersistant{
+	
+	public Ville(){
+		super();
+	}
+	
+	public Ville(Long id){
+		setId(id);
+	}
    
 	@Column(name="vil_label", nullable=false)
 	private String label;

@@ -1,6 +1,5 @@
 package com.annonces.idao;
 
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -9,45 +8,27 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.annonces.entity.Annonce;
+import com.annonces.entity.Categorie;
 import com.annonces.entity.Region;
+import com.annonces.entity.Ville;
 
-public interface IAnnonceDao extends JpaRepository<Annonce, Long>{
-	
+public interface IAnnonceDao extends JpaRepository<Annonce, Long> {
+
 	public Page<Annonce> findByType(int type, Pageable page);
-	
+
 	public Page<Annonce> findByRegionAndType(Region reg, int type, Pageable page);
-	/*
-	@Query(value=" select a.*  " + 
-                 " from   ann_annonce a, " + 
-                 "        ann_recherche r " +  
-                 " where  r.rch_id = :id " +  
-                 " and    (r.reg_id = a.reg_id or r.reg_id is null)  " +  
-                 " and    (r.cat_id = a.cat_id or r.cat_id is null)   " +
-                 " and    r.rch_urgent = a.ann_esturgent   " +
-                 " and    r.rch_type = a.ann_type   " +
-                 " and    r.rch_classe = a.ann_class   " +
-                 " and    UPPER(a.ann_titre) like r.rch_motcle  " + 
-                 " and    (r.rch_avecdescr and UPPER(a.ann_descr) like r.rch_motcle or not r.rch_avecdescr)  " +
-                 " and    UPPER(a.ann_adr) like r.rch_adresse  " +
-                 " and    a.ann_lapt between (r.rch_laptitude - r.rch_rayon) and (r.rch_laptitude + r.rch_rayon)  " +
-                 " and    a.ann_long between (r.rch_longitude - r.rch_rayon) and (r.rch_longitude + r.rch_rayon) ")
-	public Page<Annonce> researchById(@Param("id") Long id, Pageable page);
-	*/
-	
-	/*
-	@Query(value=" select a.*  " + 
-                 " from   ann_annonce a " +    
-                 " where  (a.reg_id = :r or :r is null)  " +  
-                 " and    (a.cat_id = :c or :c is null)   " +
-                 " and    a.ann_esturgent :u   " +
-                 " and    a.ann_type = :t   " +
-                 " and    a.ann_class = :cl   " +
-                 " and    UPPER(a.ann_titre) like :m  " + 
-                 " and    (:d and UPPER(a.ann_descr) like :m or not :d)  " +
-                 " and    UPPER(a.ann_adr) like :a  " +
-                 " and    (a.ann_lapt between (:lp - :ry) and (:lp + :ry) or :ry is null) " +
-                 " and    (a.ann_long between (:lg - :ry) and (:lg + :ry) or :ry is null) " , nativeQuery=true)
-public Page<Annonce> researchByCritere(@Param("r") Long r, @Param("c") Long c, @Param("u") boolean u, @Param("t") int t, @Param("cl") int cl, 
-		@Param("m") String m, @Param("d") boolean d, @Param("a") String a, @Param("lp") Long lp, @Param("ry") int ry, @Param("lg") Long lg, Pageable page);
-		*/
+
+	@Query(" from Annonce a " + " where (a.categorie = :cat or :cat is null) "
+			+ " and   (a.ville = :vil or :vil is null) " + " and   (a.region = :reg or :reg is null) "
+			+ " and   (a.type = 0 and :ofr=true or :ofr=false) " + " and   (a.type = 1 and :dem=true or :dem=false) "
+			+ " and   (a.classement = 0 and :part=true or :part=false) " + " and   (a.classement = 1 and :prof=true or :prof=false) "
+			+ " and   (a.estUrgent = true or :urg=false) "
+			+ " and   ((upper(a.titre) like :mCle and :aDesc=false) or (upper(a.titre||' '||a.description) like :mCle and :aDesc=true)) "
+			+ " and   ((a.laptitude between :lpmin and :lpmax) or (a.longitude between :lgmin and :lgmax) or :ray is null) ")
+	public Page<Annonce> researchCrit(@Param("mCle") String mCle, @Param("ofr") boolean ofr, @Param("dem") boolean dem,
+			@Param("aDesc") boolean aDesc, @Param("reg") Region reg, @Param("cat") Categorie cat,
+			@Param("vil") Ville vil, @Param("part") boolean part, @Param("prof") boolean prof,
+			@Param("urg") boolean urg, @Param("lpmin") Integer lpmin, @Param("lpmax") Integer lpmax,
+			@Param("lgmin") Integer lgmin, @Param("lgmax") Integer lgmax, @Param("ray") Integer ray, Pageable page);
+
 }

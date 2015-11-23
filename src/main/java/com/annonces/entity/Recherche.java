@@ -21,32 +21,35 @@ public class Recherche extends ObjetPersistant{
 	private String motsCle;
 	@Column(name="rch_avecdescr")
 	private boolean avecDesc;
-	//0:Offre 1: Demande
-	@Column(name="rch_type", length=1)
-	private int type;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "reg_id")
-	private Region region;
-	@Column(name="rch_adresse", length=100)
-	private String adresse;
+	@Column(name="rch_offre")
+	private boolean offre;
+	@Column(name="rch_demande")
+	private boolean demande;
 	@Column(name="rch_laptitude")
 	private Long laptitude;
 	@Column(name="rch_longitude")
 	private Long longitude;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name = "cat_id")
-	private Categorie categorie;
-	//0:Partculier 1:Proffessionnel
-	@Column(name="rch_classe", length=1)
-	private int classe;
+	@Column(name="rch_partic")
+	private boolean particulier;
+	@Column(name="rch_profess")
+	private boolean professionnel;
 	@Column(name="rch_urgent")
 	private boolean urgent;
+	@Column(name="rch_rayon")
+	private int rayon;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "cat_id")
+	private Categorie categorie;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "reg_id")
+	private Region region;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "vil_id")
+	private Ville ville;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "cpt_id")
 	private Compte compte;
-	@Column(name="rch_rayon")
-	private int rayon;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -65,23 +68,11 @@ public class Recherche extends ObjetPersistant{
 	public void setAvecDesc(boolean avecDesc) {
 		this.avecDesc = avecDesc;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
 	public Region getRegion() {
 		return region;
 	}
 	public void setRegion(Region region) {
 		this.region = region;
-	}
-	public String getAdresse() {
-		return adresse;
-	}
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
 	}
 	public Long getLaptitude() {
 		return laptitude;
@@ -101,12 +92,6 @@ public class Recherche extends ObjetPersistant{
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	public int getClasse() {
-		return classe;
-	}
-	public void setClasse(int classe) {
-		this.classe = classe;
-	}
 	public boolean isUrgent() {
 		return urgent;
 	}
@@ -125,5 +110,36 @@ public class Recherche extends ObjetPersistant{
 	public void setRayon(int rayon) {
 		this.rayon = rayon;
 	}
+	public boolean isOffre() {
+		return offre;
+	}
+	public void setOffre(boolean offre) {
+		this.offre = offre;
+	}
+	public boolean isDemande() {
+		return demande;
+	}
+	public void setDemande(boolean demande) {
+		this.demande = demande;
+	}
+	public boolean isParticulier() {
+		return particulier;
+	}
+	public void setParticulier(boolean particulier) {
+		this.particulier = particulier;
+	}
+	public boolean isProfessionnel() {
+		return professionnel;
+	}
+	public void setProfessionnel(boolean professionnel) {
+		this.professionnel = professionnel;
+	}
+	public Ville getVille() {
+		return ville;
+	}
+	public void setVille(Ville ville) {
+		this.ville = ville;
+	}
+	
 	
 }

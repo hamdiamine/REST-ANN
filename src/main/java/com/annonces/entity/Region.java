@@ -14,6 +14,9 @@ public class Region extends ObjetPersistant {
 	public Region() {
 		super();
 	}
+	public Region(Long id){
+		this.setId(id);
+	}
 	public Region(Long id, String code, String label) {
 		this.setId(id);
 		this.code = code;
