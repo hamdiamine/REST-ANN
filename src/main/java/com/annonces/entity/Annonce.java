@@ -43,10 +43,10 @@ public class Annonce extends ObjetPersistant{
 	private String description;
 	@Column(name="ann_prix", nullable=false)
 	private float prix;
-	@Column(name="ann_lapt")
-    private Long laptitude;
-	@Column(name="ann_long")
-	private Long longitude;
+	@Column(name="ann_lapt", precision=15, scale=4)
+    private Double laptitude;
+	@Column(name="ann_long", precision=15, scale=4)
+	private Double longitude;
 	@Column(name="ann_pseudo", length=10)
     private String pseudo;
 	@Column(name="ann_email", length=80)
@@ -77,6 +77,8 @@ public class Annonce extends ObjetPersistant{
 	private Region region;
 	@Transient
 	private String dateAff;
+	@Transient
+	private String geo;
     
 	public int getClassement() {
 		return classement;
@@ -108,16 +110,16 @@ public class Annonce extends ObjetPersistant{
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
-	public Long getLaptitude() {
+	public Double getLaptitude() {
 		return laptitude;
 	}
-	public void setLaptitude(Long laptitude) {
+	public void setLaptitude(Double laptitude) {
 		this.laptitude = laptitude;
 	}
-	public Long getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 	public String getPseudo() {
@@ -206,4 +208,13 @@ public class Annonce extends ObjetPersistant{
 		}
 		return null;
 	}
+
+	public String getGeo() {
+		if(laptitude != null){
+			return "["+laptitude.toString()+","+longitude.toString()+"]";
+		}
+		return null;
+	}
+	
+	
 }

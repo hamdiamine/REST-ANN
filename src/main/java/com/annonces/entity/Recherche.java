@@ -26,9 +26,9 @@ public class Recherche extends ObjetPersistant{
 	@Column(name="rch_demande")
 	private boolean demande;
 	@Column(name="rch_laptitude")
-	private Long laptitude;
+	private Float laptitude;
 	@Column(name="rch_longitude")
-	private Long longitude;
+	private Float longitude;
 	@Column(name="rch_partic")
 	private boolean particulier;
 	@Column(name="rch_profess")
@@ -74,16 +74,16 @@ public class Recherche extends ObjetPersistant{
 	public void setRegion(Region region) {
 		this.region = region;
 	}
-	public Long getLaptitude() {
+	public Float getLaptitude() {
 		return laptitude;
 	}
-	public void setLaptitude(Long laptitude) {
+	public void setLaptitude(Float laptitude) {
 		this.laptitude = laptitude;
 	}
-	public Long getLongitude() {
+	public Float getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(Long longitude) {
+	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 	public Categorie getCategorie() {

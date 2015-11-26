@@ -28,7 +28,7 @@ public interface IAnnonceDao extends JpaRepository<Annonce, Long> {
 	public Page<Annonce> researchCrit(@Param("mCle") String mCle, @Param("ofr") boolean ofr, @Param("dem") boolean dem,
 			@Param("aDesc") boolean aDesc, @Param("reg") Region reg, @Param("cat") Categorie cat,
 			@Param("vil") Ville vil, @Param("part") boolean part, @Param("prof") boolean prof,
-			@Param("urg") boolean urg, @Param("lpmin") Integer lpmin, @Param("lpmax") Integer lpmax,
-			@Param("lgmin") Integer lgmin, @Param("lgmax") Integer lgmax, @Param("ray") Integer ray, Pageable page);
+			@Param("urg") boolean urg, @Param("lpmin") Double lpmin, @Param("lpmax") Double lpmax,
+			@Param("lgmin") Double lgmin, @Param("lgmax") Double lgmax, @Param("ray") Integer ray, Pageable page);
 
 }

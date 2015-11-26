@@ -115,20 +115,32 @@ public class AnnonceController {
 
 	@RequestMapping("/annonce/researchcrt")
 	public Page<Annonce> researchCrit(String mCle, boolean ofr, boolean dem, boolean aDesc, Long reg, Long cat,
-			Long vil, boolean part, boolean prof, boolean urg, Integer ray, Integer lp, Integer lg, int page,
-			int sort) {
+			Long vil, boolean part, boolean prof, boolean urg, Integer ray, Float lp, Float lg, int page, int sort) {
 		Region rg = null;
 		Categorie ct = null;
 		Ville vl = null;
-		Integer lpmin = null;
-		Integer lpmax = null;
-		Integer lgmin = null;
-		Integer lgmax = null;
+		Double lpmin = null;
+		Double lpmax = null;
+		Double lgmin = null;
+		Double lgmax = null;
 		if (ray != null) {
-			lpmin = lp - ray;
-			lpmax = lp + ray;
-			lgmin = lg - ray;
-			lgmax = lg + ray;
+			// 1° de latitude = 111,11 Km, on fait donc un produit en croix
+			double offSetLat = ray / 111.11;
+
+			// 1° de longitude à 'latitude' degrés de latitude correspond à
+			// OneLongitudeDegree mètres. On passe à la méthode Math.Cos
+			// des radians
+			double oneLongitudeDegree = 111.11 * Math.cos(lp * Math.PI / 180);
+
+			// Produit en croix pour trouver le nombre de degrés de longitude
+			// auquel
+			// correspond la longueur de notre rayon
+			double offSetLong = ray / oneLongitudeDegree;
+
+			lpmax = lp + offSetLat;
+			lpmin = lp - offSetLat;
+			lgmax = lg + offSetLong;
+			lgmin = lg - offSetLong;
 		}
 
 		String motCle = "%" + mCle.toUpperCase() + "%";
@@ -142,7 +154,7 @@ public class AnnonceController {
 		if (vil != null) {
 			vl = new Ville(vil);
 		}
-		
+
 		if (sort == 0) {
 			return annonceDao.researchCrit(motCle, ofr, dem, aDesc, rg, ct, vl, part, prof, urg, lpmin, lpmax, lgmin,
 					lgmax, ray, new PageRequest(page, 20));
@@ -161,7 +173,7 @@ public class AnnonceController {
 		}
 		return annonceDao.researchCrit(motCle, ofr, dem, aDesc, rg, ct, vl, part, prof, urg, lpmin, lpmax, lgmin, lgmax,
 				ray, new PageRequest(page, 20));
-				
+
 	}
 
 	@RequestMapping("/annonce/get")
