@@ -40,21 +40,21 @@ public class AnnonceController {
 	public Page<Annonce> allP(int page) {
 		return annonceDao.findAll(new PageRequest(page, 20));
 	}
-
-	@RequestMapping("/annonce/allofrp")
-	public Page<Annonce> allOfrP(int page, int sort) {
+	
+	@RequestMapping("/annonce/findbytype")
+	public Page<Annonce> findByType(int type, int page, int sort){
 		if (sort == 0) {
-			return annonceDao.findByType(0, new PageRequest(page, 20));
+			return annonceDao.findByType(type, new PageRequest(page, 20));
 		} else if (sort == 1) {
-			return annonceDao.findByType(0, new PageRequest(page, 20, Sort.Direction.ASC, "dateDepose"));
+			return annonceDao.findByType(type, new PageRequest(page, 20, Sort.Direction.ASC, "dateDepose"));
 		} else if (sort == 2) {
-			return annonceDao.findByType(0, new PageRequest(page, 20, Sort.Direction.DESC, "dateDepose"));
+			return annonceDao.findByType(type, new PageRequest(page, 20, Sort.Direction.DESC, "dateDepose"));
 		} else if (sort == 3) {
-			return annonceDao.findByType(0, new PageRequest(page, 20, Sort.Direction.ASC, "prix"));
+			return annonceDao.findByType(type, new PageRequest(page, 20, Sort.Direction.ASC, "prix"));
 		} else if (sort == 4) {
-			return annonceDao.findByType(0, new PageRequest(page, 20, Sort.Direction.DESC, "prix"));
+			return annonceDao.findByType(type, new PageRequest(page, 20, Sort.Direction.DESC, "prix"));
 		}
-		return annonceDao.findByType(0, new PageRequest(page, 20));
+		return annonceDao.findByType(type, new PageRequest(page, 20));
 	}
 
 	@RequestMapping("/annonce/allofrregp")
@@ -75,42 +75,6 @@ public class AnnonceController {
 					new PageRequest(page, 20, Sort.Direction.DESC, "prix"));
 		}
 		return annonceDao.findByRegionAndType(new Region(reg, null, null), 0, new PageRequest(page, 20));
-	}
-
-	@RequestMapping("/annonce/alldemregp")
-	public Page<Annonce> allDemByRegP(Long reg, int page, int sort) {
-		if (sort == 0) {
-			return annonceDao.findByRegionAndType(new Region(reg, null, null), 1, new PageRequest(page, 20));
-		} else if (sort == 1) {
-			return annonceDao.findByRegionAndType(new Region(reg, null, null), 1,
-					new PageRequest(page, 20, Sort.Direction.ASC, "dateDepose"));
-		} else if (sort == 2) {
-			return annonceDao.findByRegionAndType(new Region(reg, null, null), 1,
-					new PageRequest(page, 20, Sort.Direction.DESC, "dateDepose"));
-		} else if (sort == 3) {
-			return annonceDao.findByRegionAndType(new Region(reg, null, null), 1,
-					new PageRequest(page, 20, Sort.Direction.ASC, "prix"));
-		} else if (sort == 4) {
-			return annonceDao.findByRegionAndType(new Region(reg, null, null), 1,
-					new PageRequest(page, 20, Sort.Direction.DESC, "prix"));
-		}
-		return annonceDao.findByRegionAndType(new Region(reg, null, null), 1, new PageRequest(page, 20));
-	}
-
-	@RequestMapping("/annonce/alldemp")
-	public Page<Annonce> allDemP(int page, int sort) {
-		if (sort == 0) {
-			return annonceDao.findByType(1, new PageRequest(page, 20));
-		} else if (sort == 1) {
-			return annonceDao.findByType(1, new PageRequest(page, 20, Sort.Direction.ASC, "dateDepose"));
-		} else if (sort == 2) {
-			return annonceDao.findByType(1, new PageRequest(page, 20, Sort.Direction.DESC, "dateDepose"));
-		} else if (sort == 3) {
-			return annonceDao.findByType(1, new PageRequest(page, 20, Sort.Direction.ASC, "prix"));
-		} else if (sort == 4) {
-			return annonceDao.findByType(1, new PageRequest(page, 20, Sort.Direction.DESC, "prix"));
-		}
-		return annonceDao.findByType(1, new PageRequest(page, 20));
 	}
 
 	@RequestMapping("/annonce/researchcrt")
