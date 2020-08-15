@@ -40,6 +40,11 @@ public class AnnonceController {
 	public Page<Annonce> allP(int page) {
 		return annonceDao.findAll(new PageRequest(page, 20));
 	}
+
+        @RequestMapping("/annonce/test")
+	public String test() {
+		return new String("HKH");
+	}
 	
 	@RequestMapping("/annonce/findbytype")
 	public Page<Annonce> findByType(int type, int page, int sort){
